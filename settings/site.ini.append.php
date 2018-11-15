@@ -3,5 +3,7 @@
 [RegionalSettings]
 TranslationExtensions[]=occhart
 
+[RoleSettings]
+PolicyOmitList[]=occhart/data
 
 */ ?>
