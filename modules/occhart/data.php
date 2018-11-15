@@ -10,9 +10,11 @@ ob_get_clean();
 header('Content-Type: text/plain; charset=utf-8');
 $contentObjectAttribute = eZContentObjectAttribute::fetch((int)$attributeId, (int)$version);
 if ($contentObjectAttribute instanceof eZContentObjectAttribute && $contentObjectAttribute->attribute('data_type_string') == OCChartType::DATA_TYPE_STRING){
-    $content = $contentObjectAttribute->content();
-    if ($content['data_source'] && OCChartDataSourceHandler::exists($content['data_source'])){
-        OCChartDataSourceHandler::get($content['data_source'])->downloadCsvData($contentObjectAttribute, $version, $content);
+    if ($contentObjectAttribute->object()->canRead()) {
+        $content = $contentObjectAttribute->content();
+        if ($content['data_source'] && OCChartDataSourceHandler::exists($content['data_source'])) {
+            OCChartDataSourceHandler::get($content['data_source'])->downloadCsvData($contentObjectAttribute, $version, $content);
+        }
     }
 }
 eZExecution::cleanExit();

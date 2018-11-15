@@ -1,6 +1,6 @@
 {default attribute_base='ContentObjectAttribute' html_class='full' placeholder=false()}
 {def $attribute_content = $attribute.content}
-    
+
 <filedset class="Form-field{if $attribute.has_validation_error} has-error{/if}">
 
     {run-once}
