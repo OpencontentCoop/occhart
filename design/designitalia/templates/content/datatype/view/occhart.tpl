@@ -2,7 +2,7 @@
 
 {if $attribute_content.data_source_is_valid}
     <div id="chart-render_{$attribute.id}">
-        <em>{'Loading'|i18n('occhart/attribute')}</em>
+        <p class="text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
     </div>
 
     {run-once}
@@ -20,7 +20,10 @@
         'highcharts/modules/exporting.js',
         'highcharts/modules/no-data-to-display.js'
     ))}
-    {ezcss_require(array('ec.css'))}
+    {ezcss_require(array(
+        'ec.css',
+        'highcharts/highcharts.css'
+    ))}
     {/run-once}
 
     <script>{literal}
