@@ -1,13 +1,14 @@
 <?php
 
 /** @var eZModule $module */
-$module = $Params['module'];
+$module = $Params['Module'];
 $attributeId = $Params['AttributeId'];
 $version = $Params['AttributeVersion'];
-$language = $Params['AttributeLanguage'];
 
 ob_get_clean();
-header('Content-Type: text/plain; charset=utf-8');
+if (!isset($_GET['debug'])) {
+    header('Content-Type: text/plain; charset=utf-8');
+}
 $contentObjectAttribute = eZContentObjectAttribute::fetch((int)$attributeId, (int)$version);
 if ($contentObjectAttribute instanceof eZContentObjectAttribute && $contentObjectAttribute->attribute('data_type_string') == OCChartType::DATA_TYPE_STRING){
     if ($contentObjectAttribute->object()->canRead()) {
