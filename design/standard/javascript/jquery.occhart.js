@@ -15,6 +15,14 @@
                 var ratioParts = settings.ratio.split(':');
                 options.chart.height = (ratioParts[1]/ratioParts[0] * 100) + '%';
             }
+            if(settings.hidelegend){
+                options.legend = {enabled: false};
+            }
+            if(settings.hidetitle){
+                options.title = {text: null};
+                options.subtitle = {text: null};                    
+            }
+            console.log(options);
             new Highcharts.Chart(options);
         });
 
