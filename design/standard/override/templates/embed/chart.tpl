@@ -4,5 +4,5 @@
 {set $width = "300px"
 	 $ratio = '4:3'}
 {/if}
-{attribute_view_gui attribute=$object|attribute('chart') ratio=$ratio width=$width}  
+{attribute_view_gui attribute=$object.data_map.chart ratio=$ratio width=$width}  
 {undef $width $ratio}

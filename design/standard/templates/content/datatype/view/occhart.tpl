@@ -1,7 +1,19 @@
 {def $attribute_content = $attribute.content}
+{if is_set($id_prefix)|not()}
+    {def $id_prefix = rand( 0, $attribute.id )}
+{/if}
+
+{def $element_id = concat($id_prefix, $attribute.id)}
 
 {if $attribute_content.data_source_is_valid}
-    <div id="chart-render_{$attribute.id}">
+    <div id="chart-render_{$element_id}" 
+         {if is_set($width)}style="width:{$width}"{/if}
+         data-url="{concat('/occhart/data/', $attribute.id, '/', $attribute.version)|ezurl(no)}"
+         data-config='{$attribute_content.config_string}'
+         {if is_set($ratio)}data-ratio="{$ratio}"{/if}
+         {if and(is_set($show_title), $show_title|eq(false()))}data-hidetitle="1"{/if}
+         {if and(is_set($show_legend), $show_legend|eq(false()))}data-hidelegend="1"{/if}
+         {if and(is_set($show_export), $show_export|eq(false()))}data-hideexport="1"{/if}>
         <em>{'Loading'|i18n('occhart/attribute')}</em>
     </div>
 
@@ -18,22 +30,18 @@
         'highcharts/modules/treemap.js',
         'highcharts/modules/boost.js',
         'highcharts/modules/exporting.js',
-        'highcharts/modules/no-data-to-display.js'
+        'highcharts/modules/no-data-to-display.js',
+        'jquery.occhart.js'
     ))}
-    {ezcss_require(array('ec.css'))}
+    {ezcss_require(array(
+        'ec.css',
+        'highcharts/highcharts.css'
+    ))}
     {/run-once}
 
     <script>{literal}
         $(document).ready(function(){
-            var easyChart_{/literal}{$attribute.id}{literal} = new ec({
-                dataUrl: "{/literal}{concat('/occhart/data/', $attribute.id, '/', $attribute.version)|ezurl(no)}{literal}"
-            });
-            easyChart_{/literal}{$attribute.id}{literal}.setConfigStringified({/literal}'{$attribute_content.config_string|wash(javascript)}'{literal});
-            easyChart_{/literal}{$attribute.id}{literal}.on('dataUpdate', function(e){
-                var options = easyChart_{/literal}{$attribute.id}{literal}.getConfigAndData();
-                options.chart.renderTo = $('#chart-render_{/literal}{$attribute.id}{literal}')[0];
-                var chart_{/literal}{$attribute.id}{literal} = new Highcharts.Chart(options);
-            });
+            $('#chart-render_{/literal}{$element_id}{literal}').occhart();
         });
     {/literal}</script>
 {/if}

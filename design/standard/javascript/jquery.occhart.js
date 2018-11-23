@@ -22,7 +22,9 @@
                 options.title = {text: null};
                 options.subtitle = {text: null};                    
             }
-            console.log(options);
+            if(settings.hideexport){
+                options.exporting = {enabled: false};
+            }
             new Highcharts.Chart(options);
         });
 
