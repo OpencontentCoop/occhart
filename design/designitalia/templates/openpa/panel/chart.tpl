@@ -1,6 +1,6 @@
 <div class="openpa-panel {$node|access_style}" style="width: 100%">
     
-    {attribute_view_gui attribute=$node|attribute('chart') ratio='16:9' show_title=false() show_legend=false() show_export=false()}
+    {attribute_view_gui attribute=$node|attribute('chart') ratio='16:9' show_title=false() show_legend=false() show_export=false() responsive=true()}
 
     <div class="openpa-panel-content">
         <h3 class="Card-title">

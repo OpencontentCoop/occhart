@@ -1,7 +1,7 @@
 <div class="openpa-line class-{$node.class_identifier} media {$node|access_style}">
 
     <div class="media-image">
-        {attribute_view_gui attribute=$node|attribute('chart') ratio='4:3' width="200px" show_title=false() show_legend=false() show_export=false()}
+        {attribute_view_gui attribute=$node|attribute('chart') ratio='4:3' width="200px" show_title=false() show_legend=false() show_export=false() responsive=true()}
     </div>
 
     <div class="media-body">

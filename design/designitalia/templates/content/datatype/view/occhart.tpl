@@ -12,6 +12,7 @@
          data-config='{$attribute_content.config_string}'
          {if is_set($ratio)}data-ratio="{$ratio}"{/if}
          {if and(is_set($show_title), $show_title|eq(false()))}data-hidetitle="1"{/if}
+         {if and(is_set($responsive), $responsive|eq(true()))}data-responsive="1"{/if}
          {if and(is_set($show_legend), $show_legend|eq(false()))}data-hidelegend="1"{/if}
          {if and(is_set($show_export), $show_export|eq(false()))}data-hideexport="1"{/if}>
         <p class="text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>

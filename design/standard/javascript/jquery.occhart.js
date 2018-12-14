@@ -15,6 +15,9 @@
                 var ratioParts = settings.ratio.split(':');
                 options.chart.height = (ratioParts[1]/ratioParts[0] * 100) + '%';
             }
+            if(settings.responsive){
+                options.chart.width = null;
+            }
             if(settings.hidelegend){
                 options.legend = {enabled: false};
             }
@@ -24,7 +27,7 @@
             }
             if(settings.hideexport){
                 options.exporting = {enabled: false};
-            }
+            }            
             new Highcharts.Chart(options);
         });
 
