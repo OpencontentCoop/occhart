@@ -179,7 +179,7 @@ class OCChartOcqlQueryParser
         $queryParts[] = "sort [name => asc]";
         $this->baseQuery = implode(' and ', $queryParts);
 
-        eZDebug::writeDebug( $this->baseQuery, 'baseQuery');
+        eZDebug::writeDebug( $this->baseQuery, 'baseQuery');        
     }
 
     private function getField($field)
@@ -307,6 +307,8 @@ class OCChartOcqlQueryParser
 
         if ($this->rowField['dataType'] == eZObjectRelationListType::DATA_TYPE_STRING) {
             $this->columns[] = $this->getFacetedRowColumn($columnField, $filter);
+        }else if ($this->rowField['dataType'] == eZSelectionType::DATA_TYPE_STRING) {
+            $this->columns[] = $this->getFacetedRowColumn($columnField);
         } else {
             $this->columns[] = $this->getAllRowColumn($columnField, $filter);
         }
