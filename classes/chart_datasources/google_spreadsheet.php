@@ -66,10 +66,10 @@ class OCChartDataSourceGoogleSpreadsheet implements OCChartDataSourceInterface
                         $info = $this->getSpreadsheetInfo($url);
                         $info['spreadsheet_url'] = $url;
 
-                        if (count($info['sheets']) == 1){
-                            $info['selected_sheet'] = $info['sheets'][0];
-                            $content['data_source_is_valid'] = true;
-                        }
+                        // if (count($info['sheets']) == 1){
+                        //     $info['selected_sheet'] = $info['sheets'][0];
+                        //     $content['data_source_is_valid'] = true;
+                        // }
 
                         $content = $contentObjectAttribute->content();
                         $content['data_source_params'] = $info;

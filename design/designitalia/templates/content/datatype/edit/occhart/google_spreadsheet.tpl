@@ -7,7 +7,7 @@
         </button>
         <a href="{$attribute_content.data_source_params.spreadsheet_url|wash( xhtml )}">{$attribute_content.data_source_params.title|wash()}</a>
     </p>
-    {if and( is_set($attribute_content.data_source_params.selected_sheet)|not(), $attribute_content.data_source_params.sheets|count()|gt(1))}
+    {if and( is_set($attribute_content.data_source_params.selected_sheet)|not(), $attribute_content.data_source_params.sheets|count()|gt(0))}
         <p>
             <label class="Form-label">
                 {'Select sheet'|i18n('occhart/attribute')}
