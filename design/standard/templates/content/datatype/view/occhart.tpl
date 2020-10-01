@@ -31,6 +31,7 @@
         'highcharts/modules/treemap.js',
         'highcharts/modules/boost.js',
         'highcharts/modules/exporting.js',
+        'highcharts/modules/export-data.js',
         'highcharts/modules/no-data-to-display.js',
         'jquery.occhart.js'
     ))}
