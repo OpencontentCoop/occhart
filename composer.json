@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "ezsystems/ezpublish-legacy-installer": "*",
-        "asimlqt/php-google-spreadsheet-client": "3.*"
+        "opencontent/googlesheet": "*"
     },
     "extra": {
         "ezpublish-legacy-extension-name": "occhart"

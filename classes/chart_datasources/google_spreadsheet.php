@@ -1,8 +1,6 @@
 <?php
 
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\ServiceRequestFactory;
-use Google\Spreadsheet\SpreadsheetService;
+use Opencontent\Google\GoogleSheet;
 
 class OCChartDataSourceGoogleSpreadsheet implements OCChartDataSourceInterface
 {
@@ -20,13 +18,10 @@ class OCChartDataSourceGoogleSpreadsheet implements OCChartDataSourceInterface
     {
         if (isset($content['data_source_params']['worksheet_id']) && $content['data_source_params']['selected_sheet']) {
             $googleSpreadsheetId = $content['data_source_params']['worksheet_id'];
-            $serviceRequest = new DefaultServiceRequest("");
-            ServiceRequestFactory::setInstance($serviceRequest);
-            $spreadsheetService = new SpreadsheetService();
-            $worksheetFeed = $spreadsheetService->getPublicSpreadsheet($googleSpreadsheetId);
+
+            $sheet = new GoogleSheet($googleSpreadsheetId);
             try {
-                $worksheet = $worksheetFeed->getByTitle($content['data_source_params']['selected_sheet']);
-                echo $worksheet->getCsv();
+                echo $sheet->getSheetDataCsv($content['data_source_params']['selected_sheet']);
             }catch (Exception $e){
                 echo $e->getMessage();
             }
@@ -136,19 +131,11 @@ class OCChartDataSourceGoogleSpreadsheet implements OCChartDataSourceInterface
             str_replace('https://docs.google.com/spreadsheets/d/', '', $googleSpreadsheetUrl));
         $googleSpreadsheetId = array_shift($googleSpreadsheetTemp);
 
-        $serviceRequest = new DefaultServiceRequest("");
-        ServiceRequestFactory::setInstance($serviceRequest);
-        $spreadsheetService = new SpreadsheetService();
-
+        $sheet = new GoogleSheet($googleSpreadsheetId);
         $data = array();
         $data['worksheet_id'] = $googleSpreadsheetId;
-        $worksheetFeed = $spreadsheetService->getPublicSpreadsheet($googleSpreadsheetId);
-        $data['title'] = (string)$worksheetFeed->getXml()->title;
-        $entries = $worksheetFeed->getEntries();
-        $data['sheets'] = array();
-        foreach ($entries as $entry){
-            $data['sheets'][] = $entry->getTitle();
-        }
+        $data['title'] = $sheet->getTitle();
+        $data['sheets'] = $sheet->getSheetTitleList();
 
         return $data;
     }
